@@ -1,9 +1,10 @@
 import discord
 import asyncio
 import threading
+import os
 from flask import Flask, render_template_string, request
 
-# ======= Template HTML =======
+# ===== TEMPLATE HTML GUI =====
 HTML = """
 <!DOCTYPE html>
 <html>
@@ -40,7 +41,7 @@ HTML = """
 </html>
 """
 
-# ======= Flask App =======
+# ===== FLASK APP =====
 app = Flask(__name__)
 
 def run_bot(token, message, delay, max_channels):
@@ -86,4 +87,4 @@ def index():
     return render_template_string(HTML, status=status)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)client.run(TOKEN)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
